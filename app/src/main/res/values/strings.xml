@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">IYBApp</string>
+    <string name="no_connection">No internet connection</string>
+    <string name="service_unavailable">Service is unavailable. Try to press \"GET\" again</string>
+    <string name="show_action">Show action</string>
+    <string name="get_action">GET</string>
+    <string name="no_cached_actions">No favorite actions, press on heart icon to add one</string>
+</resources>
