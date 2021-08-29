@@ -25,7 +25,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:padding="@dimen/padding"
-            tools:text="Joke or error message" />
+            tools:text="Action or error message" />
 
         <com.example.iybapp.data.CorrectImageButton
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
