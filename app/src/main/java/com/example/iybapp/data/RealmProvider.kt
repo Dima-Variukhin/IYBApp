@@ -1,4 +1,4 @@
-package com.example.iybapp
+package com.example.iybapp.data
 
 import io.realm.Realm
 

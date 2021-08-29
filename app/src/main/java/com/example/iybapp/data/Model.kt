@@ -1,4 +1,4 @@
-package com.example.iybapp
+package com.example.iybapp.data
 
 interface Model {
     suspend fun getAction(): ActionUiModel

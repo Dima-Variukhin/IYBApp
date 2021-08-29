@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <com.example.iybapp.CorrectTextView
+        <com.example.iybapp.data.CorrectTextView
             android:id="@+id/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -27,7 +27,8 @@
             android:padding="@dimen/padding"
             tools:text="Joke or error message" />
 
-        <ImageButton
+        <com.example.iybapp.data.CorrectImageButton
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:id="@+id/changeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,14 +37,14 @@
             tools:src="@android:drawable/ic_input_add" />
     </LinearLayout>
 
-    <ProgressBar
+    <com.example.iybapp.data.CorrectProgressButton
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:indeterminate="true" />
 
-    <Button
+    <com.example.iybapp.data.CorrectButton
         android:id="@+id/actionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

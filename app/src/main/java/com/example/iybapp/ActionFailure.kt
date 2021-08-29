@@ -1,5 +1,7 @@
 package com.example.iybapp
 
+import com.example.iybapp.data.ResourceManager
+
 interface ActionFailure {
     fun getMessage(): String
 }

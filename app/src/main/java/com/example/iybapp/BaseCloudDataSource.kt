@@ -1,19 +1,25 @@
 package com.example.iybapp
 
+import com.example.iybapp.core.Mapper
+import com.example.iybapp.data.*
+import com.example.iybapp.domain.NoConnectionException
+import com.example.iybapp.domain.ServiceUnavailableException
+import retrofit2.Call
 import java.lang.Exception
 import java.net.UnknownHostException
 
-class BaseCloudDataSource(private val service: ActionService) : CloudDataSource {
-    override suspend fun getAction(): Result<ActionServerModel, ErrorType> {
-        return try {
-            val result = service.getAction()
-            Result.Success(result)
+abstract class BaseCloudDataSource<T : Mapper<ActionDataModel>> :
+    CloudDataSource {
+    protected abstract fun getActionServerModel(): Call<T>
+
+    override suspend fun getAction(): ActionDataModel {
+        try {
+            return getActionServerModel().execute().body()!!.to()
         } catch (e: Exception) {
-            val errorType = if (e is UnknownHostException)
-                ErrorType.NO_CONNECTION
+            if (e is UnknownHostException)
+                throw NoConnectionException()
             else
-                ErrorType.SERVER_UNAVAILABLE
-            Result.Error(errorType)
+                throw ServiceUnavailableException()
         }
     }
 }

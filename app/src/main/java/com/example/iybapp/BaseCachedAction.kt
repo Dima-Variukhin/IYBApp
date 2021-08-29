@@ -1,16 +1,19 @@
 package com.example.iybapp
 
+import com.example.iybapp.domain.Action
+import com.example.iybapp.data.ActionUiModel
+
 class BaseCachedAction : CachedAction {
-    private var cached: Action? = null
-    override fun saveAction(action: Action) {
+    private var cached: ChangeAction = ChangeAction.Empty()
+    override fun saveAction(action: ActionDataModel) {
         cached = action
     }
 
     override fun clear() {
-        cached = null
+        cached = ChangeAction.Empty()
     }
 
-    override suspend fun change(changeActionStatus: ChangeActionStatus): ActionUiModel? {
-        return cached?.change(changeActionStatus)
+    override suspend fun change(changeActionStatus: ChangeActionStatus): ActionDataModel {
+        return cached.change(changeActionStatus)
     }
 }
