@@ -1,52 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical">
 
-    <CheckBox
-        android:id="@+id/checkBox"
+    <com.example.iybapp.presentation.FavoriteDataView
+        android:id="@+id/actionFavoriteDataView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/padding"
-        android:text="@string/show_action" />
+        custom:actionButtonText="@string/get_action"
+        custom:checkBoxText="@string/show_favorite_action" />
 
-    <LinearLayout
+    <com.example.iybapp.presentation.FavoriteDataView
+        android:id="@+id/quoteFavoriteDataView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <com.example.iybapp.data.CorrectTextView
-            android:id="@+id/textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:padding="@dimen/padding"
-            tools:text="Action or error message" />
-
-        <com.example.iybapp.data.CorrectImageButton
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:id="@+id/changeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:background="?selectableItemBackground"
-            tools:src="@android:drawable/ic_input_add" />
-    </LinearLayout>
-
-    <com.example.iybapp.data.CorrectProgressButton
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indeterminate="true" />
-
-    <com.example.iybapp.data.CorrectButton
-        android:id="@+id/actionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/get_action" />
+        custom:actionButtonText="@string/get_quote"
+        custom:checkBoxText="@string/show_favorite_quote" />
 </LinearLayout>

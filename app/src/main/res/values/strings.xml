@@ -3,7 +3,10 @@
     <string name="no_connection">No internet connection</string>
     <string name="service_unavailable">Service is unavailable. Try to press \"GET\" again</string>
     <string name="show_action">Show action</string>
-    <string name="get_action">GET</string>
-    <string name="no_cached_actions">No favorite actions, press on heart icon to add one</string>
+    <string name="show_favorite_action">Show favorite action</string>
+    <string name="show_favorite_quote">Show favorite quote</string>
+    <string name="get_action">GET ACTION</string>
+    <string name="get_quote">GET QUOTE</string>
+    <string name="no_cached_data">No favorites! Add one by heart icon</string>
     <string name="generic_fail_message">Fail</string>
 </resources>
