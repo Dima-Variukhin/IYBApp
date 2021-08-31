@@ -1,6 +1,6 @@
 package com.example.iybapp.core.data
 
 
-interface DataFetcher {
-    suspend fun getData(): CommonDataModel
+interface DataFetcher<E> {
+    suspend fun getData(): CommonDataModel<E>
 }

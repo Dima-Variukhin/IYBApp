@@ -34,17 +34,19 @@ class IYBApp : Application() {
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-
+        val quoteMapper = CommonSuccessMapper<String>()
         val realmProvider = BaseRealmProvider()
         val cacheDataSource =
             ActionCachedDataSource(realmProvider, ActionRealmMapper(), ActionRealmToCommonMapper())
         val cloudDataSource = ActionCloudDataSource(retrofit.create(BaseActionService::class.java))
-        val jokeRepository = BaseRepository(cacheDataSource, cloudDataSource, BaseCachedData())
+        val actionRepository =
+            BaseRepository(cacheDataSource, cloudDataSource, BaseCachedData())
         val failureHandler = FailureFactory(BaseResourceManager(this))
         val mapper = CommonSuccessMapper<Int>()
         val interactor =
-            BaseInteractor(jokeRepository, failureHandler, mapper)
+            BaseInteractor(actionRepository, failureHandler, quoteMapper)
         baseViewModel = BaseViewModel(interactor, BaseCommunication())
+
 
         val quoteRepository = BaseRepository(
             QuoteCachedDataSource(realmProvider, QuoteRealmMapper(), QuoteRealmToCommonMapper()),
@@ -52,7 +54,7 @@ class IYBApp : Application() {
             BaseCachedData()
         )
         quoteViewModel = BaseViewModel(
-            BaseInteractor(quoteRepository, failureHandler, mapper),
+            BaseInteractor(quoteRepository, failureHandler, quoteMapper),
             BaseCommunication()
         )
     }

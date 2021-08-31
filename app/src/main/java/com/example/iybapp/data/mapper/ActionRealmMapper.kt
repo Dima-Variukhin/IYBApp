@@ -3,7 +3,7 @@ package com.example.iybapp.data.mapper
 import com.example.iybapp.CommonDataModelMapper
 import com.example.iybapp.data.cache.ActionRealmModel
 
-class ActionRealmMapper : CommonDataModelMapper<ActionRealmModel> {
+class ActionRealmMapper : CommonDataModelMapper<ActionRealmModel, String> {
     override fun map(
         key: String,
         third: Int,

@@ -6,6 +6,14 @@
     android:gravity="center"
     android:orientation="vertical">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:ellipsize='end'
+        custom:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
+
     <com.example.iybapp.presentation.FavoriteDataView
         android:id="@+id/actionFavoriteDataView"
         android:layout_width="match_parent"

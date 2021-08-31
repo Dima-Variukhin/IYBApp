@@ -5,10 +5,10 @@ import com.example.iybapp.core.data.CommonRepository
 import com.example.iybapp.core.domain.CommonInteractor
 import com.example.iybapp.core.domain.FailureHandler
 
-class BaseInteractor(
-    private val repository: CommonRepository,
+class BaseInteractor<E>(
+    private val repository: CommonRepository<E>,
     private val failureHandler: FailureHandler,
-    private val mapper: CommonDataModelMapper<CommonItem.Success>
+    private val mapper: CommonDataModelMapper<CommonItem.Success, E>
 ) : CommonInteractor {
     override suspend fun getItem(): CommonItem {
         return try {
@@ -26,6 +26,6 @@ class BaseInteractor(
         }
     }
 
-    override fun getFavorites(favorite: Boolean) =  repository.chooseDataSource(favorite)
+    override fun getFavorites(favorite: Boolean) = repository.chooseDataSource(favorite)
 
 }

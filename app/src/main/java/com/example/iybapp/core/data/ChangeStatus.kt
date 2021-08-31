@@ -1,5 +1,5 @@
 package com.example.iybapp.core.data
 
-interface ChangeStatus {
-    suspend fun addOrRemove(key: String, model: CommonDataModel): CommonDataModel
+interface ChangeStatus<E> {
+    suspend fun addOrRemove(key: E, model: CommonDataModel<E>): CommonDataModel<E>
 }

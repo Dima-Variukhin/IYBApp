@@ -2,6 +2,7 @@ package com.example.iybapp.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import com.example.iybapp.IYBApp
 import com.example.iybapp.R
 
@@ -26,5 +27,8 @@ class MainActivity : AppCompatActivity() {
         quoteViewModel.observe(this) { state ->
             quoteFavoriteDataView.show(state)
         }
+
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView.adapter
     }
 }

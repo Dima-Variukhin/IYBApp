@@ -7,7 +7,7 @@ import com.example.iybapp.core.presentation.CommonViewModel
 import com.example.iybapp.core.presentation.Communication
 import com.example.iybapp.presentation.State
 
-class QuoteViewModel(private val communication: Communication) : ViewModel(), CommonViewModel {
+class QuoteViewModel : ViewModel(), CommonViewModel {
     override fun getItem() {
         TODO("Not yet implemented")
     }

@@ -16,6 +16,6 @@ class NewActionServerModel(
     @SerializedName("type")
     private val type: String
 
-) : Mapper<CommonDataModel> {
+) : Mapper<CommonDataModel<String>> {
     override fun to() = CommonDataModel(key, participants, accessibility, activity, type)
 }

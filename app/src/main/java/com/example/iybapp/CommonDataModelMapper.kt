@@ -2,9 +2,9 @@ package com.example.iybapp
 
 import com.example.iybapp.domain.CommonItem
 
-interface CommonDataModelMapper<T> {
+interface CommonDataModelMapper<T, E> {
     fun map(
-        key: String,
+        key: E,
         third: Int,
         fourth: Double,
         first: String,
@@ -13,9 +13,9 @@ interface CommonDataModelMapper<T> {
     ): T
 }
 
-class CommonSuccessMapper<T> : CommonDataModelMapper<CommonItem.Success> {
+class CommonSuccessMapper<E> : CommonDataModelMapper<CommonItem.Success, E> {
     override fun map(
-        key: String,
+        key: E,
         third: Int,
         fourth: Double,
         first: String,

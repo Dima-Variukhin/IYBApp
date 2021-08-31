@@ -9,18 +9,18 @@ import com.example.iybapp.core.data.net.CloudDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class BaseRepository(
-    private val cacheDataSource: CacheDataSource,
-    private val cloudDataSource: CloudDataSource,
-    private val cached: CachedData
-) : CommonRepository {
+class BaseRepository<E>(
+    private val cacheDataSource: CacheDataSource<E>,
+    private val cloudDataSource: CloudDataSource<E>,
+    private val cached: CachedData<E>
+) : CommonRepository<E> {
 
-    private var currentDataSource: DataFetcher = cloudDataSource
+    private var currentDataSource: DataFetcher<E> = cloudDataSource
     override fun chooseDataSource(cached: Boolean) {
         currentDataSource = if (cached) cacheDataSource else cloudDataSource
     }
 
-    override suspend fun getCommonItem(): CommonDataModel = withContext(Dispatchers.IO) {
+    override suspend fun getCommonItem(): CommonDataModel<E> = withContext(Dispatchers.IO) {
         try {
             val data = currentDataSource.getData()
             cached.save(data)
@@ -31,6 +31,6 @@ class BaseRepository(
         }
     }
 
-    override suspend fun changeStatus(): CommonDataModel =
+    override suspend fun changeStatus(): CommonDataModel<E> =
         cached.change(cacheDataSource)
 }

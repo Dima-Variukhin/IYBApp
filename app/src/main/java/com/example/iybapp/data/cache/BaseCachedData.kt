@@ -5,9 +5,9 @@ import com.example.iybapp.core.data.ChangeStatus
 import com.example.iybapp.core.data.CommonDataModel
 import com.example.iybapp.core.data.cache.CachedData
 
-class BaseCachedData : CachedData {
-    private var cached: ChangeCommonItem = ChangeCommonItem.Empty()
-    override fun save(data: CommonDataModel) {
+class BaseCachedData<E> : CachedData<E> {
+    private var cached: ChangeCommonItem<E> = ChangeCommonItem.Empty()
+    override fun save(data: CommonDataModel<E>) {
         cached = data
     }
 
@@ -15,7 +15,7 @@ class BaseCachedData : CachedData {
         cached = ChangeCommonItem.Empty()
     }
 
-    override suspend fun change(changeStatus: ChangeStatus): CommonDataModel {
+    override suspend fun change(changeStatus: ChangeStatus<E>): CommonDataModel<E> {
         return cached.change(changeStatus)
     }
 }
