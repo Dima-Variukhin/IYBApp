@@ -8,5 +8,7 @@
     <string name="get_action">GET ACTION</string>
     <string name="get_quote">GET QUOTE</string>
     <string name="no_cached_data">No favorites! Add one by heart icon</string>
-    <string name="generic_fail_message">Fail</string>
+    <string name="generic_fail_message">Fail!</string>
+    <string name="remove_from_favorites">Remove from favorites?</string>
+    <string name="yes">Yes</string>
 </resources>

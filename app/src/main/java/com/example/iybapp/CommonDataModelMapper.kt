@@ -13,7 +13,7 @@ interface CommonDataModelMapper<T, E> {
     ): T
 }
 
-class CommonSuccessMapper<E> : CommonDataModelMapper<CommonItem.Success, E> {
+class CommonSuccessMapper<E> : CommonDataModelMapper<CommonItem.Success<E>, E> {
     override fun map(
         key: E,
         third: Int,
@@ -21,7 +21,7 @@ class CommonSuccessMapper<E> : CommonDataModelMapper<CommonItem.Success, E> {
         first: String,
         second: String,
         cached: Boolean
-    ) = CommonItem.Success(first, second, cached)
+    ) = CommonItem.Success(key, first, second, cached)
 
 }
 

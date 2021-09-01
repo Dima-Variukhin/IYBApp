@@ -5,7 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable/baseline_favorite_24.xml" value="0.1275" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/common_data_item.xml" value="0.28940217391304346" />
+        <entry key="app/src/main/res/layout/common_data_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/favorite_data_view.xml" value="0.26969416126042633" />
       </map>
     </option>

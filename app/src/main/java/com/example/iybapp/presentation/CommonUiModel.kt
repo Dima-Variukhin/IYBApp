@@ -1,18 +1,27 @@
 package com.example.iybapp.presentation
 
 import androidx.annotation.DrawableRes
+import com.example.iybapp.CommonDataRecyclerAdapter
 import com.example.iybapp.R
 import com.example.iybapp.core.presentation.Communication
+import com.example.iybapp.core.presentation.ShowText
 
-class BaseCommonUiModel(activity: String, type: String) : CommonUiModel(activity, type) {
+
+class BaseCommonUiModel<E>(activity: String, type: String) : CommonUiModel<E>(activity, type) {
     override fun getIconResId() = R.drawable.baseline_favorite_border_black_24
 }
 
-class FavoriteCommonUiModel(activity: String, type: String) : CommonUiModel(activity, type) {
+class FavoriteCommonUiModel<E>(private val key: E, activity: String, type: String) :
+    CommonUiModel<E>(activity, type) {
+    override fun change(listener: CommonDataRecyclerAdapter.FavoriteItemClickListener<E>) =
+        listener.change(key)
+
     override fun getIconResId() = R.drawable.baseline_favorite_black_24
+
+    override fun matches(id: E): Boolean = this.key == key
 }
 
-class FailedCommonUiModel(activity: String) : CommonUiModel(activity, "") {
+class FailedCommonUiModel<E>(activity: String) : CommonUiModel<E>(activity, "") {
     override fun text() = first
     override fun getIconResId() = 0
     override fun show(communication: Communication) = communication.showState(
@@ -20,7 +29,7 @@ class FailedCommonUiModel(activity: String) : CommonUiModel(activity, "") {
     )
 }
 
-abstract class CommonUiModel(val first: String, private val second: String) {
+abstract class CommonUiModel<T>(val first: String, private val second: String) {
     protected open fun text() = "$first\nType: \"$second\""
 
     @DrawableRes
@@ -30,8 +39,12 @@ abstract class CommonUiModel(val first: String, private val second: String) {
         State.Initial(text(), getIconResId())
     )
 
-//    fun map(callback: DataCallback) = callback.run {
-//        provideText(text())
-//        provideIconRes(getIconResId())
-//    }
+    open fun change(listener: CommonDataRecyclerAdapter.FavoriteItemClickListener<T>) = Unit
+    open fun matches(id: T): Boolean = false
+
+    fun show(showText: ShowText) = showText.show(text())
+
+
 }
+
+

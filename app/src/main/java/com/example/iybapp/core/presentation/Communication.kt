@@ -13,3 +13,4 @@ interface Communication {
     fun isState(type: Int): Boolean
 }
 
+

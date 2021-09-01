@@ -10,6 +10,7 @@ import com.example.iybapp.data.mapper.ActionRealmMapper
 import com.example.iybapp.data.mapper.QuoteRealmMapper
 import io.realm.Realm
 import io.realm.RealmObject
+import io.realm.RealmResults
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -40,13 +41,21 @@ abstract class BaseCacheDataSource<T : RealmObject, E>(
     private val realmToCommonDataMapper: RealmToCommonDataMapper<T, E>
 ) : CacheDataSource<E> {
     protected abstract val dbClass: Class<T>
-    override suspend fun getData(): CommonDataModel<E> {
+    override suspend fun getData() = getRealmData {
+        realmToCommonDataMapper.map(it.random())
+    }
+
+    override suspend fun getDataList() = getRealmData { results ->
+        results.map { realmToCommonDataMapper.map(it) }
+    }
+
+    private fun <R> getRealmData(block: (list: RealmResults<T>) -> R): R {
         realmProvider.provide().use {
             val list = it.where(dbClass).findAll()
             if (list.isEmpty())
                 throw NoCachedDataException()
             else
-                return realmToCommonDataMapper.map(list.random())
+                return block.invoke(list)
         }
     }
 
@@ -70,4 +79,12 @@ abstract class BaseCacheDataSource<T : RealmObject, E>(
                 }
             }
         }
+
+    override suspend fun remove(id: E) = withContext(Dispatchers.IO) {
+        realmProvider.provide().use { realm ->
+            realm.executeTransaction {
+                findRealmObject(realm, id)?.deleteFromRealm()
+            }
+        }
+    }
 }

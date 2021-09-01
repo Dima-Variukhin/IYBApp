@@ -7,24 +7,21 @@ import com.example.iybapp.presentation.CommonUiModel
 import com.example.iybapp.presentation.FailedCommonUiModel
 import com.example.iybapp.presentation.FavoriteCommonUiModel
 
-sealed class CommonItem : Mapper<CommonUiModel> {
-    class Success(
+sealed class CommonItem<E> : Mapper<CommonUiModel<E>> {
+    class Success<E>(
+        private val key: E,
         private val firstText: String,
         private val secondText: String,
         private val favorite: Boolean
-    ) : CommonItem() {
-        override fun to(): CommonUiModel {
-            return if (favorite) {
-                FavoriteCommonUiModel(firstText, secondText)
-            } else {
-                BaseCommonUiModel(firstText, secondText)
-            }
+    ) : CommonItem<E>() {
+        override fun to() = if (favorite) {
+            FavoriteCommonUiModel(key, firstText, secondText)
+        } else {
+            BaseCommonUiModel(firstText, secondText)
         }
     }
 
-    class Failed(private val failure: Failure) : CommonItem() {
-        override fun to(): CommonUiModel {
-            return FailedCommonUiModel(failure.getMessage())
-        }
+    class Failed<E>(private val failure: Failure) : CommonItem<E>() {
+        override fun to(): CommonUiModel<E> = FailedCommonUiModel(failure.getMessage())
     }
 }

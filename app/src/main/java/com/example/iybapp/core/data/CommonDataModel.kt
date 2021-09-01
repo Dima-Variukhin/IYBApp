@@ -1,6 +1,7 @@
 package com.example.iybapp.core.data
 
 import com.example.iybapp.CommonDataModelMapper
+import com.example.iybapp.core.presentation.ShowText
 
 class CommonDataModel<E>(
     private val key: E,
@@ -10,7 +11,7 @@ class CommonDataModel<E>(
     private val secondText: String,
     private val cached: Boolean = false
 ) : ChangeCommonItem<E> {
-
+    fun map(showText: ShowText) = showText.show(firstText)
     fun <T> map(mapper: CommonDataModelMapper<T, E>): T {
         return mapper.map(key, thirdText, fourthText, firstText, secondText, cached)
     }

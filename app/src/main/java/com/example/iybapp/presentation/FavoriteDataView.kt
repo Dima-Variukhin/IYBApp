@@ -52,7 +52,7 @@ class FavoriteDataView : LinearLayout {
         }
     }
 
-    fun linkWith(commonViewModel: CommonViewModel) {
+    fun<T> linkWith(commonViewModel: CommonViewModel<T>) {
         checkBox.setOnCheckedChangeListener { _, isChecked ->
             commonViewModel.chooseFavorites(isChecked)
         }

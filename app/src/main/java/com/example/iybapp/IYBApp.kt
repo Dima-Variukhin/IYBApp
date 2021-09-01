@@ -21,8 +21,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class IYBApp : Application() {
-    lateinit var baseViewModel: BaseViewModel
-    lateinit var quoteViewModel: BaseViewModel
+    lateinit var baseViewModel: BaseViewModel<String>
+    lateinit var actionCommunication: BaseCommunication<String>
+    lateinit var quoteViewModel: BaseViewModel<String>
     override fun onCreate() {
         super.onCreate()
         Realm.init(this)
@@ -36,16 +37,17 @@ class IYBApp : Application() {
             .build()
         val quoteMapper = CommonSuccessMapper<String>()
         val realmProvider = BaseRealmProvider()
+
         val cacheDataSource =
             ActionCachedDataSource(realmProvider, ActionRealmMapper(), ActionRealmToCommonMapper())
         val cloudDataSource = ActionCloudDataSource(retrofit.create(BaseActionService::class.java))
         val actionRepository =
             BaseRepository(cacheDataSource, cloudDataSource, BaseCachedData())
         val failureHandler = FailureFactory(BaseResourceManager(this))
-        val mapper = CommonSuccessMapper<Int>()
         val interactor =
             BaseInteractor(actionRepository, failureHandler, quoteMapper)
-        baseViewModel = BaseViewModel(interactor, BaseCommunication())
+        actionCommunication = BaseCommunication()
+        baseViewModel = BaseViewModel(interactor, actionCommunication)
 
 
         val quoteRepository = BaseRepository(
