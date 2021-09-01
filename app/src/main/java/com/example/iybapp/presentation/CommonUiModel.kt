@@ -19,6 +19,10 @@ class FavoriteCommonUiModel<E>(private val key: E, activity: String, type: Strin
     override fun getIconResId() = R.drawable.baseline_favorite_black_24
 
     override fun matches(id: E): Boolean = this.key == key
+
+    override fun same(model: CommonUiModel<E>): Boolean {
+        return model is FavoriteCommonUiModel<E> && model.key == key
+    }
 }
 
 class FailedCommonUiModel<E>(activity: String) : CommonUiModel<E>(activity, "") {
@@ -31,6 +35,8 @@ class FailedCommonUiModel<E>(activity: String) : CommonUiModel<E>(activity, "") 
 
 abstract class CommonUiModel<T>(val first: String, private val second: String) {
     protected open fun text() = "$first\nType: \"$second\""
+
+    open fun same(model: CommonUiModel<T>): Boolean = false
 
     @DrawableRes
     abstract fun getIconResId(): Int

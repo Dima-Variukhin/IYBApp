@@ -51,15 +51,8 @@ class CommonDataRecyclerAdapter<T>(
     }
 
     fun update() {
-        notifyDataSetChanged()
-    }
-
-    fun update(pair: Pair<Boolean, Int>) {
-        if (pair.first) {
-            notifyItemInserted(pair.second)
-        } else {
-            notifyItemRemoved(pair.second)
-        }
+        val result = communication.getDiffResult()
+        result.dispatchUpdatesTo(this)
     }
 
     inner class EmptyFavoritesViewHolder<T>(view: View) : CommonDataViewHolder<T>(view)
